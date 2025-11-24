@@ -12,7 +12,7 @@ class Produto:
         self.data_adicao = data_addEstoque
         
     def __str__(self):
-        return f"ID DO JOGO: {self.identificacao}\nNOME DO JOGO: {self.nome}\nEMPRESA DO JOGO: {self.empresa}\nGÊNERO DO JOGO: {self.genero}\nDATA DE LANÇAMENTO: {self.lancamento}\nDATA DE ADIÇÃO AO ESTOQUE: {self.data_adicao}\n\n"
+        return f"ID DO JOGO: {self.identificacao}\nNOME DO JOGO: {self.nome}\nEMPRESA DO JOGO: {self.empresa}\nGÊNERO DO JOGO: {self.genero}\nANO DE LANÇAMENTO: {self.lancamento}\nDATA DE ADIÇÃO AO ESTOQUE: {self.data_adicao}\n\n"
         
 # --- Lista (vetor) para armazenar esses jogos cadastrados no estoque ---
 # Por que lista? Porque ela permite ser mudada e também admite duplicatas.
@@ -27,7 +27,7 @@ print("1. Código de identificação do jogo.")
 print("2. Nome do jogo.")
 print("3. Nome da empresa do jogo.")
 print("4. Gênero do jogo.")
-print("5. Data de lançamento do jogo.")
+print("5. Ano de lançamento do jogo.")
 print("6. Data de adição do jogo ao estoque.")
 print("\n")
 print("Utilize o formato dd/mm/aaaa para datas!")
@@ -54,7 +54,7 @@ while True:
     nome_do_jogo = input(f"Informe o nome do jogo {contador_jogos:02d}: ")
     empresa_do_jogo = input(f"Insira o nome da empresa do jogo {contador_jogos:02d}: ")
     genero_do_jogo = input(f"Insira o gênero do jogo {contador_jogos:02d}: ")
-    lancamento_do_jogo = input(f"Insira a data de lançamento do jogo {contador_jogos:02d}: ")
+    lancamento_do_jogo = input(f"Insira o ano de lançamento do jogo {contador_jogos:02d}: ")
     adicao_do_jogo = input(f"Insira a data de adição do jogo {contador_jogos:02d} ao estoque: ")
     print("\n")
     
