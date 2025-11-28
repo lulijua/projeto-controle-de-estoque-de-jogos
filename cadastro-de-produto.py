@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-# Esse código é responsável pelo cadastro dos produtos.
-# Feito com classes do Python
-
-# Cria uma classe 'Produto', no caso são os jogos, ela possui todas as informações que um jogo teria.
-class Produto:
-    def __init__(self, codigo_ID, nome_jogo, empresa_jogo, genero_jogo, lancamento_jogo, data_addEstoque):
-        self.identificacao = codigo_ID
-        self.nome = nome_jogo
-        self.empresa = empresa_jogo
-        self.genero = genero_jogo
-        self.lancamento = lancamento_jogo
-        self.data_adicao = data_addEstoque
-        
-    def __str__(self):
-        return f"ID DO JOGO: {self.identificacao}\nNOME DO JOGO: {self.nome}\nEMPRESA DO JOGO: {self.empresa}\nGÊNERO DO JOGO: {self.genero}\nANO DE LANÇAMENTO: {self.lancamento}\nDATA DE ADIÇÃO AO ESTOQUE: {self.data_adicao}\n\n"
-        
-# --- Lista (vetor) para armazenar esses jogos cadastrados no estoque ---
-# Por que lista? Porque ela permite ser mudada e também admite duplicatas.
-
-jogos_no_estoque = []
-=======
 # Esse código é responsável pelo cadastro dos produtos no ESTOQUE.
 # Feito com classes e objetos do Python
 # Autora: Luiza Juá
@@ -178,7 +156,6 @@ jogos_no_estoque = [
         plataformas_jogo="PC, PlayStation, Xbox"
     )
 ]
->>>>>>> feat/caduser
     
 # --- Interação com o Usuário ---
 print("ESTOQUE DE JOGOS")
@@ -190,12 +167,6 @@ print("3. Nome da empresa do jogo.")
 print("4. Gênero do jogo.")
 print("5. Ano de lançamento do jogo.")
 print("6. Data de adição do jogo ao estoque.")
-<<<<<<< HEAD
-print("\n")
-print("Utilize o formato dd/mm/aaaa para datas!")
-print("\n")
-print("Digite SAIR no campo de CÓDIGO DE IDENTIFICAÇÃO para interromper o cadastro de um novo jogo.")
-=======
 print("7. Preço do jogo. ")
 print("8. Avaliação do jogo - 1 a 5 estrelas.")
 print("9. Descrição breve do jogo.")
@@ -209,7 +180,6 @@ print("1. Utilize o formato dd/mm/aaaa para datas!")
 print("2. Siga a sequência correta de requisitos: 1.CPU, 2.RAM, 3.GPU, 4.Armazenamento.")
 print("3. Classificações indicativas do Brasil: 0 anos (livre), 10 anos, 12 anos, 14 anos, 16 anos e 18 anos.")
 print("4. Digite SAIR no campo de CÓDIGO DE IDENTIFICAÇÃO para interromper o cadastro de um novo jogo.")
->>>>>>> feat/caduser
 print("\n")
 
 # --- Contador de Jogos ---
@@ -219,34 +189,14 @@ contador_jogos = 1
 
 # --- Solicita os dados do usuário ---
 while True:
-<<<<<<< HEAD
-    
-    print(f"\n--- Cadastrando Jogo {contador_jogos:02d} ---")
-     
-    ID_do_jogo = input(f"Informe o código de identificação do jogo {contador_jogos:02d}: ")
-    
-    # Verificação: O usuário quer cadastrar mais um jogo ou não?
-=======
     print(f"\n--- Cadastrando Jogo {contador_jogos:02d} ---")
     ID_do_jogo = input(f"Informe o código de identificação do jogo {contador_jogos:02d}: ")
     # Verificação: O usuário quer cadastrar mais um jogo ou não?
     
->>>>>>> feat/caduser
     if ID_do_jogo.lower() == 'sair':  # lower() vai ajudar a ler todas as variações.Ex.: sair, Sair, SAIR, SaIr...
         break
 
     nome_do_jogo = input(f"Informe o nome do jogo {contador_jogos:02d}: ")
-<<<<<<< HEAD
-    empresa_do_jogo = input(f"Insira o nome da empresa do jogo {contador_jogos:02d}: ")
-    genero_do_jogo = input(f"Insira o gênero do jogo {contador_jogos:02d}: ")
-    lancamento_do_jogo = input(f"Insira o ano de lançamento do jogo {contador_jogos:02d}: ")
-    adicao_do_jogo = input(f"Insira a data de adição do jogo {contador_jogos:02d} ao estoque: ")
-    print("\n")
-    
-    # --- Instancia a classe "Produto" com os dados recebidos ---
-    novo_jogo = Produto(ID_do_jogo, nome_do_jogo, empresa_do_jogo, genero_do_jogo, lancamento_do_jogo, adicao_do_jogo)
-
-=======
     empresa_do_jogo = input(f"Informe o nome da empresa do jogo {contador_jogos:02d}: ")
     
     # --- Verifica se o jogo está dentro dos gêneros suportados pela plataforma ---
@@ -333,7 +283,6 @@ while True:
     
     # --- Instancia a classe "Produto" com os dados recebidos ---
     novo_jogo = Produto(ID_do_jogo, nome_do_jogo, empresa_do_jogo, genero_do_jogo, lancamento_do_jogo, adicao_validada, preco_do_jogo, avaliacao_do_jogo, descricao_do_jogo, classificacao_do_jogo, quantidade_do_jogo, requisitos_do_jogo, plataformas_do_jogo)
->>>>>>> feat/caduser
     # Adiciona objetos à lista (append)
     jogos_no_estoque.append(novo_jogo)
     print(f"Jogo {contador_jogos:02d} '{nome_do_jogo}' cadastrado com sucesso!\n")
@@ -342,13 +291,6 @@ while True:
     contador_jogos += 1
 
 # --- Apresentação dos Dados ---
-<<<<<<< HEAD
-print(f"\n--- {len(jogos_no_estoque)} JOGOS FORAM CADASTRADOS COM SUCESSO!!! ---")
-print("\n")
-
-for produto in jogos_no_estoque:
-    print(produto)
-=======
 print(f"\n╔{'═' * 70}╗")
 print(f"║ {'ESTOQUE DE JOGOS - RELATÓRIO FINAL':^68} ║")
 print(f"╠{'═' * 70}╣")
@@ -375,4 +317,3 @@ if jogos_no_estoque:
     print(f"║ {'• Total de cópias em estoque:':<35} {total_copias:>32} ║")
     print(f"║ {'• Valor total do estoque:':<35} R$ {valor_total_estoque:>28.2f} ║")
     print(f"╚{'═' * 70}╝")
->>>>>>> feat/caduser
