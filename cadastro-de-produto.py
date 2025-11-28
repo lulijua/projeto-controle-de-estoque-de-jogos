@@ -95,10 +95,6 @@ class Produto:
 
 # --- Função para verificar se uma data é válida ---
 def verificar_data(data_str, tipo_data="data"):
-    """
-    Verifica se uma data no formato dd/mm/aaaa é válida e está entre 1980 e 2025
-    Retorna a data validada ou None se for inválida
-    """
     try:
         # Divide a string da data
         dia, mes, ano = map(int, data_str.split('/'))
@@ -206,13 +202,13 @@ while True:
     # Validação do ano de lançamento do jogo
     while True:
         try:
-            lancamento_do_jogo = int(input(f"Insira o ano de lançamento do jogo {contador_jogos:02d}: "))
-            if lancamento_do_jogo >= 1980 and lancamento_do_jogo <= datetime.date.today().year:
+            lancamento_do_jogo = input(f"Insira o ano de lançamento do jogo {contador_jogos:02d}: ")
+            if lancamento_do_jogo > 1980:
                 break
             else: 
-                print(f"Ano inválido! O ano deve estar entre 1980 e {datetime.date.today().year}.")
+                print("Ano inválido! Só possuímos jogos produzidos a partir de 1980.")
         except ValueError:
-            print("Por favor, digite um ano válido (apenas números)!")
+            print("Ano inválido, pois é mais antigo que 1980!")
        
     # Validação da data de adição ao estoque
     while True:
@@ -257,8 +253,7 @@ while True:
     while True:
         try:
             classificacao_do_jogo = int(input(f"Informe a classificação indicativa do jogo {contador_jogos:02d}:"))
-            classificacoes_validas = [0, 10, 12, 14, 16, 18]
-            if classificacao_do_jogo in classificacoes_validas:
+            if classificacao_do_jogo == 0 or classificacao_do_jogo == 10 or classificacao_do_jogo == 12 or classificacao_do_jogo == 14 or classificacao_do_jogo == 16 or classificacao_do_jogo == 18:
                 break
             else:
                 print("Classificação indicativa inválida! As classificações indicativas possíveis no Brasil são: 0(Livre), 10, 12, 14, 16 e 18 anos.")
