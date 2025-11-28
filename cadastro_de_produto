@@ -25,12 +25,76 @@ class Produto:
     def __str__(self):
         return f"ID DO JOGO: {self.identificacao}\nNOME DO JOGO: {self.nome}\nEMPRESA DO JOGO: {self.empresa}\nGÊNERO DO JOGO: {self.genero}\nANO DE LANÇAMENTO: {self.lancamento}\nDATA DE ADIÇÃO AO ESTOQUE: {self.data_adicao}\nPREÇO DO JOGO: {self.preco}\nAVALIAÇÃO DO JOGO (1 a 5 estrelas): {self.avaliacao}\nDESCRIÇÃO DO JOGO: {self.descricao}\nCLASSIFICAÇÃO INDICATIVA DO JOGO: {self.classificacao}\nQUANTIDADE DE CÓPIAS DISPONÍVEIS NO ESTOQUE: {self.quantidade}\nREQUISITOS MÍNIMOS PARA RODAR O JOGO (1. CPU, 2.RAM, 3.GPU, 4.Armazenamento): {self.requisitos}\nPLATAFORMAS DISPONÍVEIS: {self.plataformas}"
 
+        # Converte avaliação para estrelinhas de avaliação (mto fofas)
+    def exibir_formatado(self):
+        estrelas = "★" * self.avaliacao + "☆" * (5 - self.avaliacao)
+        
+        # Formatar classificação --> indica que 0 = LIVRE.
+        if self.classificacao == 0:
+            classificacao_str = "LIVRE"
+        else:
+            classificacao_str = f"{self.classificacao} anos"
+            
+        # Formatar preço --> adiciona as barrinhas da tabela
+        preco_formatado = f"R$ {self.preco:.2f}"
+        
+        print(f"╔{'═' * 70}╗")
+        print(f"║ {'JOGO CADASTRADO - ' + self.nome.upper():^68} ║")
+        print(f"╠{'═' * 70}╣")
+        print(f"║ {'INFORMAÇÕES BÁSICAS:':<68} ║")
+        print(f"║ {'• ID:':<15} {self.identificacao:<52} ║")
+        print(f"║ {'• Nome:':<15} {self.nome:<52} ║")
+        print(f"║ {'• Empresa:':<15} {self.empresa:<52} ║")
+        print(f"║ {'• Gênero:':<15} {self.genero:<52} ║")
+        print(f"╠{'─' * 70}╣")
+        print(f"║ {'DETALHES TÉCNICOS:':<68} ║")
+        print(f"║ {'• Lançamento:':<15} {self.lancamento:<52} ║")
+        print(f"║ {'• Data no Estoque:':<15} {self.data_adicao:<52} ║")
+        print(f"║ {'• Classificação:':<15} {classificacao_str:<52} ║")
+        print(f"║ {'• Plataformas:':<15} {self.plataformas:<52} ║")
+        print(f"╠{'─' * 70}╣")
+        print(f"║ {'INFORMAÇÕES COMERCIAIS:':<68} ║")
+        print(f"║ {'• Preço:':<15} {preco_formatado:<52} ║")
+        print(f"║ {'• Quantidade:':<15} {self.quantidade} cópias{' ' * 42} ║")
+        print(f"║ {'• Avaliação:':<15} {estrelas} ({self.avaliacao}/5){' ' * 35} ║")
+        print(f"╠{'─' * 70}╣")
+        print(f"║ {'DESCRIÇÃO:':<68} ║")
+        # Quebrar a descrição em linhas de no máximo 65 caracteres
+        descricao_quebrada = []
+        palavras = self.descricao.split()
+        linha_atual = ""
+        for palavra in palavras:
+            if len(linha_atual + " " + palavra) <= 65:
+                linha_atual += " " + palavra if linha_atual else palavra
+            else:
+                descricao_quebrada.append(linha_atual)
+                linha_atual = palavra
+        if linha_atual:
+            descricao_quebrada.append(linha_atual)
+        
+        for linha in descricao_quebrada:
+            print(f"║ {linha:<68} ║")
+        print(f"╠{'─' * 70}╣")
+        print(f"║ {'REQUISITOS MÍNIMOS:':<68} ║")
+        # Quebrar os requisitos também
+        requisitos_quebrados = []
+        palavras_req = self.requisitos.split()
+        linha_req = ""
+        for palavra in palavras_req:
+            if len(linha_req + " " + palavra) <= 65:
+                linha_req += " " + palavra if linha_req else palavra
+            else:
+                requisitos_quebrados.append(linha_req)
+                linha_req = palavra
+        if linha_req:
+            requisitos_quebrados.append(linha_req)
+            
+        for linha in requisitos_quebrados:
+            print(f"║ {linha:<68} ║")
+        print(f"╚{'═' * 70}╝")
+
 # --- Função para verificar se uma data é válida ---
 def verificar_data(data_str, tipo_data="data"):
-    """
-    Verifica se uma data no formato dd/mm/aaaa é válida e está entre 1980 e 2025
-    Retorna a data validada ou None se for inválida
-    """
     try:
         # Divide a string da data
         dia, mes, ano = map(int, data_str.split('/'))
@@ -56,7 +120,38 @@ def verificar_data(data_str, tipo_data="data"):
 # --- Lista (vetor) para armazenar esses jogos cadastrados no estoque ---
 # Por que lista? Porque ela permite ser mudada e também admite duplicatas.
 
-jogos_no_estoque = []
+jogos_no_estoque = [
+     Produto(
+        codigo_ID="FIFA23-001",
+        nome_jogo="FIFA 23",
+        empresa_jogo="EA Sports",
+        genero_jogo="Esporte",
+        lancamento_jogo=2022,
+        data_addEstoque="15/01/2023",
+        preco_jogo=199.90,
+        avaliacao_jogo=4,
+        descricao_jogo="Jogo de futebol com os times e ligas mais recentes",
+        classificacao_jogo=0,
+        quantidade_jogo=25,
+        requisitos_jogo="Intel Core i5-3550, 8GB RAM, NVIDIA GTX 670, 50GB",
+        plataformas_jogo="PC, PlayStation, Xbox"
+    ),
+    Produto(
+        codigo_ID="GTA5-001",
+        nome_jogo="Grand Theft Auto V",
+        empresa_jogo="Rockstar Games",
+        genero_jogo="Ação e Aventura",
+        lancamento_jogo=2013,
+        data_addEstoque="10/03/2023",
+        preco_jogo=129.90,
+        avaliacao_jogo=5,
+        descricao_jogo="Mundo aberto onde você vive a vida de criminosos em Los Santos",
+        classificacao_jogo=18,
+        quantidade_jogo=30,
+        requisitos_jogo="Intel Core i5-3470, 8GB RAM, NVIDIA GTX 660, 72GB",
+        plataformas_jogo="PC, PlayStation, Xbox"
+    )
+]
     
 # --- Interação com o Usuário ---
 print("ESTOQUE DE JOGOS")
@@ -99,6 +194,9 @@ while True:
 
     nome_do_jogo = input(f"Informe o nome do jogo {contador_jogos:02d}: ")
     empresa_do_jogo = input(f"Informe o nome da empresa do jogo {contador_jogos:02d}: ")
+    
+    # --- Verifica se o jogo está dentro dos gêneros suportados pela plataforma ---
+    
     genero_do_jogo = input(f"Informe o gênero do jogo {contador_jogos:02d} (MOBA, FPS, RPG...): ")
     
     # Validação do ano de lançamento do jogo
@@ -188,9 +286,29 @@ while True:
     contador_jogos += 1
 
 # --- Apresentação dos Dados ---
-print(f"\n--- {len(jogos_no_estoque)} JOGOS FORAM CADASTRADOS COM SUCESSO!!! ---")
+print(f"\n╔{'═' * 70}╗")
+print(f"║ {'ESTOQUE DE JOGOS - RELATÓRIO FINAL':^68} ║")
+print(f"╠{'═' * 70}╣")
+print(f"║ {f'TOTAL DE JOGOS CADASTRADOS: {len(jogos_no_estoque)}':^68} ║")
+print(f"╚{'═' * 70}╝")
 print("\n")
 
-for produto in jogos_no_estoque:
-    print(produto)
-    print("-" * 50)
+for i, produto in enumerate(jogos_no_estoque, 1):
+    print(f"\n{'=' * 72}")
+    print(f"JOGO {i:02d} DE {len(jogos_no_estoque)}")
+    print(f"{'=' * 72}")
+    produto.exibir_formatado()
+    print("\n" + " " * 20 + "─" * 32 + "\n")  # Separador entre jogos
+
+# Resumo final
+if jogos_no_estoque:
+    total_copias = sum(produto.quantidade for produto in jogos_no_estoque)
+    valor_total_estoque = sum(produto.preco * produto.quantidade for produto in jogos_no_estoque)
+    
+    print(f"\n╔{'═' * 70}╗")
+    print(f"║ {'RESUMO DO ESTOQUE':^68} ║")
+    print(f"╠{'═' * 70}╣")
+    print(f"║ {'• Total de jogos diferentes:':<35} {len(jogos_no_estoque):>32} ║")
+    print(f"║ {'• Total de cópias em estoque:':<35} {total_copias:>32} ║")
+    print(f"║ {'• Valor total do estoque:':<35} R$ {valor_total_estoque:>28.2f} ║")
+    print(f"╚{'═' * 70}╝")
