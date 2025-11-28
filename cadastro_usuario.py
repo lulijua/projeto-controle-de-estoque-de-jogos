@@ -1,6 +1,5 @@
-# Código responsavel pela parte do perfil do usuário 
+# Código responsavel pela parte do perfil do usuário.
 
-# ---- funções ----
 
 # Lista para armazenar todos os clientes cadastrados
 clientes_cadastrados = []
@@ -33,31 +32,51 @@ while True:
         "Email": None,
         "Numero": None,
         "Idade": None,
-        #fazer outro dicionario
-        "Genero1": None,
-        "Genero2": None,
-        "Genero3": None
+       
+    "jogo_genero" : {
+           "Genero1": None,
+           "Genero2": None,
+           "Genero3": None,
+       }
+
     }
 
     print(f"\n====CADASTRO DO CLIENTE {contador_clientes}====\n")
+
+
+    # Nome do cliente
+
     perfil_cliente["Nome"] = input(f"Digite o nome do cliente {contador_clientes}: ")
 
+    remover_espacos = perfil_cliente["Nome"].replace(" ", "")
+    if remover_espacos.isalpha() == True:
+        break
+    else:
+        while remover_espacos.isalpha() == False:
+            perfil_cliente["Nome"] = input("Nome inválido! Digite novamente: ")
+            remover_espacos = perfil_cliente["Nome"].replace(" ", "")
+
+
+
     # Encerrar cadastro
+
     if perfil_cliente["Nome"].lower() == 'sair':
         break
 
+
     perfil_cliente["Nome de usuario"] = input(f"Digite o nome de usuario do cliente {contador_clientes}: ")
 
-    #Verificar se eh letra
-    #isalpha
+
+    #Email e verificação
 
     perfil_cliente["Email"] = input(f"Digite o email do cliente {contador_clientes}: ")
 
-    # Verificação da parte "@gmail" e se n começa com "@"
     while "@gmail" not in perfil_cliente["Email"].lower() or perfil_cliente["Email"].startswith("@"): #usamos .lower para a string ficar em minusculo e realizar a verificacao do "@gmail"
         perfil_cliente["Email"] = input("Email inválido! Tente novamente: ")
 
+
     # Telefone
+
     perfil_cliente["Numero"] = input(f"Digite o número de telefone do cliente {contador_clientes}: ")
 
     while True:
@@ -66,7 +85,9 @@ while True:
         else:
             perfil_cliente["Numero"] = input("Número inválido! Tente novamente: ")
 
+
     # Idade
+
     perfil_cliente["Idade"] = input(f"Digite a idade do cliente {contador_clientes}: ")
 
     while True:
@@ -83,11 +104,15 @@ while True:
         else:
             perfil_cliente["Idade"] = input("Valor inválido! Digite um número para idade: ")
     
+
     # Genero de jogo
+    #Analisar as opcoes de genero depois
+
     print(f"Preferências de gênero do cliente {contador_clientes}:")
-    perfil_cliente["Genero1"] = input(f"Digite uma preferência de gênero do cliente {contador_clientes}: ")
-    perfil_cliente["Genero2"] = input(f"Digite uma preferência de gênero do cliente {contador_clientes}: ")
-    perfil_cliente["Genero3"] = input(f"Digite uma preferência de gênero do cliente {contador_clientes}: ")
+    perfil_cliente["jogo_genero"]["Genero1"] = input("Genero 1: ")
+    perfil_cliente["jogo_genero"]["Genero2"] = input("Genero 2: ")
+    perfil_cliente["jogo_genero"]["Genero3"] = input("Genero 2: ")
+
 
     # Salvar cliente
     clientes_cadastrados.append(perfil_cliente)
