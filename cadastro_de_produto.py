@@ -19,7 +19,7 @@ class Produto:
         self.descricao = descricao_jogo         # Descrição breve do jogo.
         self.classificacao = classificacao_jogo # Classificação indicativa do jogo.
         self.quantidade = quantidade_jogo       # Quantidade de cópias desse jogo no estoque.
-        self.requisitos = requisitos_jogo       # Requisitos mínimos para rodar esse jogo.
+        self.requisitos = requisitos_jogo       # Requisitos para rodar esse jogo.
         self.plataformas = plataformas_jogo     # Plataformas que podem rodar esse jogo (PC, Xbox,Ps4 ...)
         
     def __str__(self):
@@ -75,7 +75,7 @@ class Produto:
         for linha in descricao_quebrada:
             print(f"║ {linha:<68} ║")
         print(f"╠{'─' * 70}╣")
-        print(f"║ {'REQUISITOS MÍNIMOS:':<68} ║")
+        print(f"║ {'REQUISITOS:':<68} ║")
         # Quebrar os requisitos também
         requisitos_quebrados = []
         palavras_req = self.requisitos.split()
@@ -122,34 +122,79 @@ def verificar_data(data_str, tipo_data="data"):
 
 jogos_no_estoque = [
      Produto(
-        codigo_ID="FIFA23-001",
-        nome_jogo="FIFA 23",
-        empresa_jogo="EA Sports",
-        genero_jogo="Esporte",
-        lancamento_jogo=2022,
-        data_addEstoque="15/01/2023",
-        preco_jogo=199.90,
-        avaliacao_jogo=4,
-        descricao_jogo="Jogo de futebol com os times e ligas mais recentes",
-        classificacao_jogo=0,
-        quantidade_jogo=25,
-        requisitos_jogo="Intel Core i5-3550, 8GB RAM, NVIDIA GTX 670, 50GB",
+        codigo_ID="FS001",
+        nome_jogo="Dark Souls: Remastered",
+        empresa_jogo="FromSoftware",
+        genero_jogo="RPG",
+        lancamento_jogo=2018,
+        data_addEstoque="28/11/2025",
+        preco_jogo=154.90,
+        avaliacao_jogo=5,
+        descricao_jogo="Mas então, fez-se o jogo. Experimente novamente o jogo aclamado pela crítica! Belamente remasterizado, volte a Lordran com detalhes em alta definição!",
+        classificacao_jogo=14,
+        quantidade_jogo=10,
+        requisitos_jogo="Intel Core i5, 6GB RAM, NVIDIA GTX 660, 8GB",
         plataformas_jogo="PC, PlayStation, Xbox"
     ),
     Produto(
-        codigo_ID="GTA5-001",
-        nome_jogo="Grand Theft Auto V",
-        empresa_jogo="Rockstar Games",
-        genero_jogo="Ação e Aventura",
-        lancamento_jogo=2013,
-        data_addEstoque="10/03/2023",
-        preco_jogo=129.90,
-        avaliacao_jogo=5,
-        descricao_jogo="Mundo aberto onde você vive a vida de criminosos em Los Santos",
-        classificacao_jogo=18,
-        quantidade_jogo=30,
-        requisitos_jogo="Intel Core i5-3470, 8GB RAM, NVIDIA GTX 660, 72GB",
+        codigo_ID="FS002",
+        nome_jogo="Dark Souls II",
+        empresa_jogo="FromSoftware",
+        genero_jogo="RPG",
+        lancamento_jogo=2014,
+        data_addEstoque="28/11/2025",
+        preco_jogo=154.90,
+        avaliacao_jogo=4,
+        descricao_jogo="Dark Souls II é a tão esperada sequência do sucesso avassalador Dark Souls.",
+        classificacao_jogo=14,
+        quantidade_jogo=10,
+        requisitos_jogo="AMD Phenom II X2, 8GB RAM, NVIDIA GeForce 9600GT, 12GB",
         plataformas_jogo="PC, PlayStation, Xbox"
+    ),
+    Produto(
+        codigo_ID="FS003",
+        nome_jogo="Dark Souls III",
+        empresa_jogo="FromSoftware",
+        genero_jogo="RPG",
+        lancamento_jogo=2016,
+        data_addEstoque="28/11/2025",
+        preco_jogo=229.90,
+        avaliacao_jogo=5,
+        descricao_jogo="Dark Souls continua a ultrapassar seus próprios limites em um ambicioso novo capítulo da série!",
+        classificacao_jogo=14,
+        quantidade_jogo=10,
+        requisitos_jogo="Intel Core i5, 8GB RAM, NVIDIA GTX750 TI, 25GB",
+        plataformas_jogo="PC, PlayStation, Xbox"
+    ),
+    Produto(
+        codigo_ID="ND001",
+        nome_jogo="The Last of Us Part I",
+        empresa_jogo="Naughty Dog LLC",
+        genero_jogo="Survival",
+        lancamento_jogo=2023,
+        data_addEstoque="28/11/2025",
+        preco_jogo=249.90,
+        avaliacao_jogo=5,
+        descricao_jogo="Descubra o jogo premiado que inspirou a série de TV aclamada pela crítica.",
+        classificacao_jogo=18,
+        quantidade_jogo=10,
+        requisitos_jogo="Intel Core i7, 16GB RAM, AMD Radeon RX 470, 100GB",
+        plataformas_jogo="PC, PlayStation, Xbox"
+    ),
+    Produto(
+        codigo_ID="ND002",
+        nome_jogo="The Last of Us Part II Remastered",
+        empresa_jogo="Naughty Dog LLC",
+        genero_jogo="Survival",
+        lancamento_jogo=2025,
+        data_addEstoque="28/11/2025",
+        preco_jogo=199.90,
+        avaliacao_jogo=5,
+        descricao_jogo="Experimente o vencedor de mais de 300 prêmios de Jogo do Ano, agora no PC.",
+        classificacao_jogo=18,
+        quantidade_jogo=10,
+        requisitos_jogo="Intel Core i3, 16GB RAM, NVIDIA GeForce GTX 1650, 150GB",
+        plataformas_jogo="PC, PlayStation"
     )
 ]
     
@@ -168,7 +213,7 @@ print("8. Avaliação do jogo - 1 a 5 estrelas.")
 print("9. Descrição breve do jogo.")
 print("10. Classificação indicativa do jogo.")
 print("11. Quantidade de cópias disponíveis no estoque.")
-print("12. Requisitos mínimos para rodar o jogo.")
+print("12. Requisitos para rodar o jogo.")
 print("13. Plataforams que rodam o jogo.")
 print("\n")
 print("--- AVISOS ---")
@@ -196,8 +241,20 @@ while True:
     empresa_do_jogo = input(f"Informe o nome da empresa do jogo {contador_jogos:02d}: ")
     
     # --- Verifica se o jogo está dentro dos gêneros suportados pela plataforma ---
+    generos_aceitos = {  "rpg", "fps","survival","moba","gacha","terror","puzzle","esportes","chill","coop"}
     
-    genero_do_jogo = input(f"Informe o gênero do jogo {contador_jogos:02d} (MOBA, FPS, RPG...): ")
+    print("Gêneros de Jogo Aceitos pela Plataforma:")
+    print(", " .join(generos_aceitos))
+    
+while True:
+    genero_do_jogo = input(f"Informe o gênero do jogo {contador_jogos:02d} (MOBA, FPS, RPG...): ").strip().lower()
+    if genero_do_jogo in generos_aceitos:
+            break;
+    else:
+        print("Ops! :(")
+        print("Este gênero de jogo não é coberto pela nossa plataforma! Tente novamente com um desses abaixo.")
+        print(", " .join(generos_aceitos))
+    
     
     # Validação do ano de lançamento do jogo
     while True:
@@ -271,7 +328,7 @@ while True:
         except ValueError:
             print("Insira um valor maior que zero (0)!")
             
-    requisitos_do_jogo = input(f"Informe os requisitos mínimos do jogo {contador_jogos:02d} nessa ordem: 1.PROCESSADOR 2.MEMÓRIA RAM  3.PLACA DE VÍDEO  4.ARMAZENAMENTO: ")
+    requisitos_do_jogo = input(f"Informe os requisitos do jogo {contador_jogos:02d} nessa ordem: 1.PROCESSADOR 2.MEMÓRIA RAM  3.PLACA DE VÍDEO  4.ARMAZENAMENTO: ")
     plataformas_do_jogo = input(f"Informe quais plataformas rodam o jogo {contador_jogos:02d} (Xbox, PC, PlayStation...): ")
     print("\n")
     
