@@ -98,3 +98,5 @@ print(f"\n====={contador_clientes - 1} CLIENTES ESTÃO REGISTRADOS=====\n")
 
 for cliente in clientes_cadastrados:
     print(cliente)
+
+    #testando
