@@ -19,7 +19,7 @@ class Produto:
         self.descricao = descricao_jogo         # Descrição breve do jogo.
         self.classificacao = classificacao_jogo # Classificação indicativa do jogo.
         self.quantidade = quantidade_jogo       # Quantidade de cópias desse jogo no estoque.
-        self.requisitos = requisitos_jogo       # Requisitos mínimos para rodar esse jogo.
+        self.requisitos = requisitos_jogo       # Requisitos para rodar esse jogo.
         self.plataformas = plataformas_jogo     # Plataformas que podem rodar esse jogo (PC, Xbox,Ps4 ...)
         
     def __str__(self):
@@ -75,7 +75,7 @@ class Produto:
         for linha in descricao_quebrada:
             print(f"║ {linha:<68} ║")
         print(f"╠{'─' * 70}╣")
-        print(f"║ {'REQUISITOS MÍNIMOS:':<68} ║")
+        print(f"║ {'REQUISITOS:':<68} ║")
         # Quebrar os requisitos também
         requisitos_quebrados = []
         palavras_req = self.requisitos.split()
@@ -213,7 +213,7 @@ print("8. Avaliação do jogo - 1 a 5 estrelas.")
 print("9. Descrição breve do jogo.")
 print("10. Classificação indicativa do jogo.")
 print("11. Quantidade de cópias disponíveis no estoque.")
-print("12. Requisitos mínimos para rodar o jogo.")
+print("12. Requisitos para rodar o jogo.")
 print("13. Plataforams que rodam o jogo.")
 print("\n")
 print("--- AVISOS ---")
@@ -241,8 +241,20 @@ while True:
     empresa_do_jogo = input(f"Informe o nome da empresa do jogo {contador_jogos:02d}: ")
     
     # --- Verifica se o jogo está dentro dos gêneros suportados pela plataforma ---
+    generos_aceitos = {  "rpg", "fps","survival","moba","gacha","terror","puzzle","esportes","chill","coop"}
     
-    genero_do_jogo = input(f"Informe o gênero do jogo {contador_jogos:02d} (MOBA, FPS, RPG...): ")
+    print("Gêneros de Jogo Aceitos pela Plataforma:")
+    print(", " .join(generos_aceitos))
+    
+while True:
+    genero_do_jogo = input(f"Informe o gênero do jogo {contador_jogos:02d} (MOBA, FPS, RPG...): ").strip().lower()
+    if genero_do_jogo in generos_aceitos:
+            break;
+    else:
+        print("Ops! :(")
+        print("Este gênero de jogo não é coberto pela nossa plataforma! Tente novamente com um desses abaixo.")
+        print(", " .join(generos_aceitos))
+    
     
     # Validação do ano de lançamento do jogo
     while True:
@@ -316,7 +328,7 @@ while True:
         except ValueError:
             print("Insira um valor maior que zero (0)!")
             
-    requisitos_do_jogo = input(f"Informe os requisitos mínimos do jogo {contador_jogos:02d} nessa ordem: 1.PROCESSADOR 2.MEMÓRIA RAM  3.PLACA DE VÍDEO  4.ARMAZENAMENTO: ")
+    requisitos_do_jogo = input(f"Informe os requisitos do jogo {contador_jogos:02d} nessa ordem: 1.PROCESSADOR 2.MEMÓRIA RAM  3.PLACA DE VÍDEO  4.ARMAZENAMENTO: ")
     plataformas_do_jogo = input(f"Informe quais plataformas rodam o jogo {contador_jogos:02d} (Xbox, PC, PlayStation...): ")
     print("\n")
     
