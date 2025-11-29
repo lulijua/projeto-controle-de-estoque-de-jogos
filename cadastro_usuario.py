@@ -142,3 +142,5 @@ for i, cliente in enumerate(clientes_cadastrados, 1):
     print(f"└────────────────────────────────────────────────")
     print()
 """
+
+print("teste :P")
