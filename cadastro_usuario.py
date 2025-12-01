@@ -1,5 +1,60 @@
 # Código responsável pela parte do perfil do usuário.
 
+#---Funções---
+#Funções para identificar se o estilo de jogo escolhido pelo usuário é possível.
+def genero_jogo1 (Genero1):
+
+    if Genero1.lower() in ['rpg', 'fps', 'survival', 'puzzle', 'chill', 'gacha', 'esportes', 'moba', 'terror', 'coop']:
+        return 0
+    else:
+        print(f"Genero de jogo indisponível. Tente novamente. ")
+        return 1
+
+def genero_jogo2 (Genero2):
+
+    if Genero2.lower() in ['rpg', 'fps', 'survival', 'puzzle', 'chill', 'gacha', 'esportes', 'moba', 'terror', 'coop']:
+        return 0
+    else:
+        print(f"Genero de jogo indisponível. Tente novamente.")
+        return 1
+
+def genero_jogo3 (Genero3):
+
+    if Genero3.lower() in ['rpg', 'fps', 'survival', 'puzzle', 'chill', 'gacha', 'esportes', 'moba', 'terror', 'coop']:
+        return 0
+    else:
+        print(f"Genero de jogo indisponível. Tente novamente.")
+        return 1
+    
+#funções para verificar os nomes de usuario, email e numero de telefone, caso haja algum em comum com outro usuario
+
+def verificar_usuario(Usuario):
+
+    if len(clientes_cadastrados) >0:
+        for i in range(0, len(clientes_cadastrados)):
+            if Usuario.lower() == clientes_cadastrados[i]["Usuario"]:
+                print("O nome de usuário já está em uso. Tente novamente.")
+                return 1
+    return 0
+
+def verificar_email(Email):
+    
+    if len(clientes_cadastrados) > 0:
+        for i in range (0, len(clientes_cadastrados)):
+            if Email.lower() == clientes_cadastrados[i]["Email"]:
+                print("O Email já está em uso. Tente novamente.")
+                return 1
+    return 0
+
+def verificar_numero(Numero):
+
+    if len(clientes_cadastrados) > 0:
+        for i in range (0, len(clientes_cadastrados)):
+            if Numero.lower() == clientes_cadastrados[i]["Numero"]:
+                print("O número de telefone já está em uso. Tente novamente.")
+                return 1
+    return 0
+
 # Lista para armazenar todos os clientes cadastrados
 clientes_cadastrados = []
 
@@ -9,7 +64,7 @@ contador_clientes = 1
 # Instruções para o usuário
 print("\n=====INSTRUÇÕES PARA CADASTRO=====\n")
 print("1- Digite o nome completo do cliente.")
-print("2- Digite o nome de usuário do cliente.")
+print("2- Digite o  usuário do cliente.")
 print("3- Digite o email do cliente.")
 print("4- Digite o numero de telefone do cliente.")
 print("5- Digite a idade do cliente.")
@@ -26,7 +81,7 @@ while True:
     # Dicionário para guardar as infos do cliente
     perfil_cliente = {
         "Nome": None,
-        "Nome de usuario": None,
+        "Usuario": None,
         "Email": None,
         "Numero": None,
         "Idade": None,
@@ -59,23 +114,27 @@ while True:
         if perfil_cliente["Nome"].lower() == 'sair':
             break
 
-    # Nome de usuário
-    perfil_cliente["Nome de usuario"] = input(f"Digite o nome de usuario do cliente {contador_clientes}: ")
+    #  usuário e função para verificar o usuario
+    perfil_cliente["Usuario"] = input(f"Digite o nome de usuario do cliente {contador_clientes}: ")
+
+    while verificar_usuario(perfil_cliente["Usuario"]) != 0:
+        perfil_cliente["Usuario"] = input(f"Digite o nome de usuario do cliente {contador_clientes}: ")
 
     # Email e verificação
     perfil_cliente["Email"] = input(f"Digite o email do cliente {contador_clientes}: ")
+    
+    while verificar_email(perfil_cliente["Email"]) != 0 or "@gmail" not in perfil_cliente["Email"].lower() or perfil_cliente["Email"].startswith("@"):
+        print("Email inválido ou já cadastrado. Tente novamente.")
 
-    while "@gmail" not in perfil_cliente["Email"].lower() or perfil_cliente["Email"].startswith("@"):
-        perfil_cliente["Email"] = input("Email inválido! Tente novamente: ")
+        perfil_cliente["Email"] = input(f"Digite o email do cliente {contador_clientes}: ")
 
     # Telefone
     perfil_cliente["Numero"] = input(f"Digite o número de telefone do cliente {contador_clientes}: ")
 
-    while True:
-        if len(perfil_cliente["Numero"]) == 12 and perfil_cliente["Numero"][2] == " ":
-            break
-        else:
-            perfil_cliente["Numero"] = input("Número inválido! Tente novamente: ")
+    while verificar_numero(perfil_cliente["Numero"]) != 0 or len(perfil_cliente["Numero"]) != 12 or perfil_cliente["Numero"][2] != " ":
+            print("Número inválido ou já cadastrado! Tente novamente.")
+
+            perfil_cliente["Numero"] = input(f"Digite o número de telefone do cliente {contador_clientes}: ")
 
     # Idade
     perfil_cliente["Idade"] = input(f"Digite a idade do cliente {contador_clientes}: ")
@@ -96,13 +155,26 @@ while True:
 
     # Gênero de jogo
     print(f"Preferências de gênero do cliente {contador_clientes}:")
+
     perfil_cliente["jogo_genero"]["Genero1"] = input("Genero 1: ")
+
+    while genero_jogo1(perfil_cliente["jogo_genero"]["Genero1"]) != 0:
+        perfil_cliente["jogo_genero"]["Genero1"] = input("Genero 1: ")
+
     perfil_cliente["jogo_genero"]["Genero2"] = input("Genero 2: ")
-    perfil_cliente["jogo_genero"]["Genero3"] = input("Genero 3: ")  # Corrigido: estava "Genero 2"
+
+    while genero_jogo2(perfil_cliente["jogo_genero"]["Genero2"]) != 0:
+        perfil_cliente["jogo_genero"]["Genero2"] = input("Genero 2: ")
+
+    perfil_cliente["jogo_genero"]["Genero3"] = input("Genero 3: ")
+
+    while genero_jogo3(perfil_cliente["jogo_genero"]["Genero3"]) != 0:
+        perfil_cliente["jogo_genero"]["Genero3"] = input("Genero 3: ")
 
     # Salvar cliente
     clientes_cadastrados.append(perfil_cliente)
-    contador_clientes += 1
+    contador_clientes += 1             
+
 
 # Apresentação dos dados - FORMA MELHORADA
 print(f"\n====={contador_clientes - 1} CLIENTES ESTÃO REGISTRADOS=====\n")
@@ -112,7 +184,7 @@ for i, cliente in enumerate(clientes_cadastrados, 1):
     print(f"║ {'CLIENTE ' + str(i):^48} ║")
     print(f"╠{'═' * 50}╣")
     print(f"║ {'NOME:':<20} {cliente['Nome']:<28} ║")
-    print(f"║ {'USUÁRIO:':<20} {cliente['Nome de usuario']:<28} ║")
+    print(f"║ {'USUÁRIO:':<20} {cliente['Usuario']:<28} ║")
     print(f"║ {'EMAIL:':<20} {cliente['Email']:<28} ║")
     print(f"║ {'TELEFONE:':<20} {cliente['Numero']:<28} ║")
     print(f"║ {'IDADE:':<20} {cliente['Idade']:<28} ║")
@@ -131,7 +203,7 @@ print(f"\n====={contador_clientes - 1} CLIENTES ESTÃO REGISTRADOS=====\n")
 for i, cliente in enumerate(clientes_cadastrados, 1):
     print(f"┌────────────────── CLIENTE {i} ──────────────────")
     print(f"│ NOME: {cliente['Nome']}")
-    print(f"│ USUÁRIO: {cliente['Nome de usuario']}")
+    print(f"│ USUÁRIO: {cliente['Usuario']}")
     print(f"│ EMAIL: {cliente['Email']}")
     print(f"│ TELEFONE: {cliente['Numero']}")
     print(f"│ IDADE: {cliente['Idade']}")
