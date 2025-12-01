@@ -9,7 +9,6 @@ class SistemaBusca:
     # ========== MÉTODOS DE BUSCA ==========
     
     def buscar_por_nome(self, termo_busca):
-        """Busca jogos pelo nome (busca parcial)"""
         resultados = []
         termo = termo_busca.lower()
         
@@ -20,7 +19,6 @@ class SistemaBusca:
         return resultados
     
     def buscar_por_genero_exato(self, genero_busca):
-        """Busca jogos por gênero EXATO (um gênero por jogo)"""
         resultados = []
         genero = genero_busca.strip().lower()
         
@@ -31,7 +29,6 @@ class SistemaBusca:
         return resultados
     
     def buscar_por_empresa(self, empresa_busca):
-        """Busca jogos por empresa desenvolvedora"""
         resultados = []
         empresa = empresa_busca.lower()
         
@@ -42,7 +39,6 @@ class SistemaBusca:
         return resultados
     
     def buscar_por_avaliacao_exata(self, avaliacao_busca):
-        """Busca jogos com avaliação EXATA"""
         resultados = []
         
         for jogo in self.estoque:
@@ -52,7 +48,6 @@ class SistemaBusca:
         return resultados
     
     def buscar_por_preco(self, max_preco):
-        """Busca jogos até um preço máximo"""
         resultados = []
         
         for jogo in self.estoque:
@@ -63,7 +58,6 @@ class SistemaBusca:
         return resultados
     
     def buscar_por_lancamento_exato(self, ano_busca):
-        """Busca jogos com ano de lançamento EXATO"""
         resultados = []
         
         for jogo in self.estoque:
@@ -73,7 +67,6 @@ class SistemaBusca:
         return resultados
     
     def buscar_avancada(self, **filtros):
-        """Busca avançada com múltiplos filtros"""
         resultados = self.estoque
         
         if 'nome' in filtros and filtros['nome']:
@@ -99,8 +92,8 @@ class SistemaBusca:
         
         return resultados
     
+    #Recomendação de jogos com base nos gostos do usuario
     def recomendar_para_usuario(self, usuario_nome, max_resultados=5):
-        """Recomenda jogos baseado nas preferências do usuário (por NOME DE USUÁRIO)"""
         usuario_encontrado = None
         
         for usuario in self.usuarios:
@@ -133,7 +126,6 @@ class SistemaBusca:
     # ========== MÉTODOS DE EXIBIÇÃO ==========
     
     def exibir_jogo_simples(self, jogo):
-        """Exibe um jogo em formato simplificado"""
         estrelas = "★" * jogo.avaliacao + "☆" * (5 - jogo.avaliacao)
         
         print("+" + "=" * 68 + "+")
@@ -149,7 +141,6 @@ class SistemaBusca:
         print("+" + "=" * 68 + "+")
     
     def exibir_resultados(self, resultados, titulo="RESULTADOS DA BUSCA"):
-        """Exibe uma lista de resultados"""
         if not resultados:
             print(f"\n{titulo}: Nenhum jogo encontrado!")
             return
@@ -163,7 +154,6 @@ class SistemaBusca:
             print(f"{i:2d}. {jogo.nome:<35} | {jogo.genero:<15} | R$ {jogo.preco:7.2f} | {estrelas}")
     
     def exibir_detalhes_jogo(self, index, resultados):
-        """Exibe detalhes completos de um jogo específico"""
         if 0 <= index < len(resultados):
             jogo = resultados[index]
             jogo.exibir_formatado()
@@ -173,7 +163,6 @@ class SistemaBusca:
     # ========== MENU PRINCIPAL ==========
     
     def menu_principal(self):
-        """Menu interativo do sistema de busca"""
         while True:
             print("\n" + "="*70)
             print("SISTEMA DE BUSCA E RECOMENDAÇÃO DE JOGOS")
@@ -367,7 +356,6 @@ class SistemaBusca:
                 input("\nPressione Enter para voltar ao menu principal...")
     
     def menu_detalhes(self, resultados):
-        """Menu para ver detalhes de jogos específicos"""
         if not resultados:
             return
         
@@ -406,7 +394,6 @@ class SistemaBusca:
                         print("Opção inválida! Digite um número, 'V' ou 'S'")
 
 def mostrar_bem_vindo():
-    """Exibe tela de boas-vindas"""
     print("\n" + "="*70)
     print("BEM-VINDO AO SISTEMA DE BUSCA DE JOGOS")
     print("="*70)
