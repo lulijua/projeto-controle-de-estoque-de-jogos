@@ -214,7 +214,7 @@ print("9. Descrição breve do jogo.")
 print("10. Classificação indicativa do jogo.")
 print("11. Quantidade de cópias disponíveis no estoque.")
 print("12. Requisitos para rodar o jogo.")
-print("13. Plataforams que rodam o jogo.")
+print("13. Plataformas que rodam o jogo.")
 print("\n")
 print("--- AVISOS ---")
 print("1. Utilize o formato dd/mm/aaaa para datas!")
@@ -246,20 +246,20 @@ while True:
     print("Gêneros de Jogo Aceitos pela Plataforma:")
     print(", " .join(generos_aceitos))
     
-while True:
-    genero_do_jogo = input(f"Informe o gênero do jogo {contador_jogos:02d} (MOBA, FPS, RPG...): ").strip().lower()
-    if genero_do_jogo in generos_aceitos:
-            break;
-    else:
-        print("Ops! :(")
-        print("Este gênero de jogo não é coberto pela nossa plataforma! Tente novamente com um desses abaixo.")
-        print(", " .join(generos_aceitos))
+    while True:
+        genero_do_jogo = input(f"Informe o gênero do jogo {contador_jogos:02d} (MOBA, FPS, RPG...): ").strip().lower()
+        if genero_do_jogo in generos_aceitos:
+                break;
+        else:
+            print("Ops! :(")
+            print("Este gênero de jogo não é coberto pela nossa plataforma! Tente novamente com um desses abaixo.")
+            print(", " .join(generos_aceitos))
     
     
     # Validação do ano de lançamento do jogo
     while True:
         try:
-            lancamento_do_jogo = input(f"Insira o ano de lançamento do jogo {contador_jogos:02d}: ")
+            lancamento_do_jogo = int(input(f"Insira o ano de lançamento do jogo {contador_jogos:02d}: "))
             if lancamento_do_jogo > 1980:
                 break
             else: 
