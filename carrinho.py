@@ -19,7 +19,7 @@ def adicionar_ao_carrinho(nome_produto):
         return False
         
     #Verifica se o produto está em estoque
-    if produto_encontrado.quantidade_estoque <= 0:
+    if produto_encontrado.quantidade <= 0:
         print("Produto fora de estoque.")
         return False    
         
@@ -27,7 +27,7 @@ def adicionar_ao_carrinho(nome_produto):
     carrinho.append(produto_encontrado)
 
     #Reduz a quantidade em estoque
-    produto_encontrado.quantidade_estoque -= 1
+    produto_encontrado.quantidade -= 1
     print(f"Produto {produto_encontrado.nome} adicionado ao carrinho.")
     return True
 
@@ -46,3 +46,4 @@ def finalizar_compra():
     
     print(f"Total da compra: R$ {total_carrinho:.2f}")
     carrinho.clear()  # Limpa o carrinho após a finalização da compra
+
