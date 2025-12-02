@@ -142,9 +142,9 @@ class SistemaBusca:
             print("4. Buscar por avaliação exata")
             print("5. Buscar por preço máximo")
             print("6. Buscar por ano de lançamento exato")
-            print("8. Recomendações personalizadas")
-            print("9. Ver todos os jogos disponíveis")
-            print("10. Ver todos os usuários cadastrados")
+            print("7. Recomendações personalizadas")
+            print("8. Ver todos os jogos disponíveis")
+            print("9. Ver todos os usuários cadastrados")
             print("0. Sair do sistema")
             
             opcao = input("\nEscolha uma opção: ").strip()
@@ -211,7 +211,7 @@ class SistemaBusca:
                     except ValueError:
                         print("Digite um ano válido!")
                 
-                case "8":
+                case "7":
                     print("\nRECOMENDAÇÕES PERSONALIZADAS")
                     
                     if self.usuarios:
@@ -244,14 +244,14 @@ class SistemaBusca:
                         self.exibir_resultados(resultados, "RECOMENDAÇÕES PERSONALIZADAS")
                         self.menu_detalhes(resultados)
                 
-                case "9":
+                case "8":
                     print("\nTODOS OS JOGOS DISPONÍVEIS")
                     resultados = self.estoque
                     resultados.sort(key=lambda x: x.nome)
                     self.exibir_resultados(resultados, "CATÁLOGO COMPLETO")
                     self.menu_detalhes(resultados)
                 
-                case "10":
+                case "9":
                     print("\nUSUÁRIOS CADASTRADOS")
                     print("="*60)
                     for i, usuario in enumerate(self.usuarios, 1):
