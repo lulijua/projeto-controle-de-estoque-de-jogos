@@ -6,8 +6,6 @@ class SistemaBusca:
         self.estoque = jogos_no_estoque
         self.usuarios = clientes_cadastrados
     
-    # ========== MÉTODOS DE BUSCA ==========
-    
     def buscar_por_nome(self, termo_busca):
         resultados = []
         termo = termo_busca.lower()
@@ -66,33 +64,6 @@ class SistemaBusca:
         
         return resultados
     
-    def buscar_avancada(self, **filtros):
-        resultados = self.estoque
-        
-        if 'nome' in filtros and filtros['nome']:
-            termo = filtros['nome'].lower()
-            resultados = [j for j in resultados if termo in j.nome.lower()]
-        
-        if 'genero' in filtros and filtros['genero']:
-            termo = filtros['genero'].strip().lower()
-            resultados = [j for j in resultados if j.genero.strip().lower() == termo]
-        
-        if 'empresa' in filtros and filtros['empresa']:
-            termo = filtros['empresa'].lower()
-            resultados = [j for j in resultados if termo in j.empresa.lower()]
-        
-        if 'avaliacao_exata' in filtros:
-            resultados = [j for j in resultados if j.avaliacao == filtros['avaliacao_exata']]
-        
-        if 'max_preco' in filtros:
-            resultados = [j for j in resultados if j.preco <= filtros['max_preco']]
-        
-        if 'lancamento_exato' in filtros:
-            resultados = [j for j in resultados if j.lancamento == filtros['lancamento_exato']]
-        
-        return resultados
-    
-    #Recomendação de jogos com base nos gostos do usuario
     def recomendar_para_usuario(self, usuario_nome, max_resultados=5):
         usuario_encontrado = None
         
@@ -117,13 +88,9 @@ class SistemaBusca:
                 jogos_genero = self.buscar_por_genero_exato(genero)
                 recomendacoes.extend(jogos_genero)
         
-        # Não precisa remover duplicatas - cada jogo tem apenas um gênero
-        # Ordenar por avaliação (melhores primeiro)
         recomendacoes.sort(key=lambda x: x.avaliacao, reverse=True)
         
         return recomendacoes[:max_resultados]
-    
-    # ========== MÉTODOS DE EXIBIÇÃO ==========
     
     def exibir_jogo_simples(self, jogo):
         estrelas = "★" * jogo.avaliacao + "☆" * (5 - jogo.avaliacao)
@@ -160,8 +127,6 @@ class SistemaBusca:
         else:
             print("Índice inválido!")
     
-    # ========== MENU PRINCIPAL ==========
-    
     def menu_principal(self):
         while True:
             print("\n" + "="*70)
@@ -177,10 +142,9 @@ class SistemaBusca:
             print("4. Buscar por avaliação exata")
             print("5. Buscar por preço máximo")
             print("6. Buscar por ano de lançamento exato")
-            print("7. Busca avançada (múltiplos filtros)")
-            print("8. Recomendações personalizadas")
-            print("9. Ver todos os jogos disponíveis")
-            print("10. Ver todos os usuários cadastrados")
+            print("7. Recomendações personalizadas")
+            print("8. Ver todos os jogos disponíveis")
+            print("9. Ver todos os usuários cadastrados")
             print("0. Sair do sistema")
             
             opcao = input("\nEscolha uma opção: ").strip()
@@ -248,48 +212,6 @@ class SistemaBusca:
                         print("Digite um ano válido!")
                 
                 case "7":
-                    print("\nBUSCA AVANÇADA")
-                    print("Preencha os filtros (deixe em branco para ignorar):")
-                    
-                    nome = input("Nome: ").strip()
-                    genero = input("Gênero: ").strip()
-                    empresa = input("Empresa: ").strip()
-                    
-                    avaliacao_input = input("Avaliação exata (1-5): ").strip()
-                    avaliacao_exata = int(avaliacao_input) if avaliacao_input else None
-                    
-                    max_preco_input = input("Preço máximo R$: ").strip()
-                    max_preco = float(max_preco_input) if max_preco_input else None
-                    
-                    lancamento_input = input("Ano exato de lançamento: ").strip()
-                    lancamento_exato = int(lancamento_input) if lancamento_input else None
-                    
-                    filtros = {}
-                    if nome: filtros['nome'] = nome
-                    if genero: filtros['genero'] = genero
-                    if empresa: filtros['empresa'] = empresa
-                    if avaliacao_exata is not None: filtros['avaliacao_exata'] = avaliacao_exata
-                    if max_preco is not None: filtros['max_preco'] = max_preco
-                    if lancamento_exato is not None: filtros['lancamento_exato'] = lancamento_exato
-                    
-                    resultados = self.buscar_avancada(**filtros)
-                    
-                    desc_filtros = []
-                    for chave, valor in filtros.items():
-                        if chave == 'avaliacao_exata':
-                            desc_filtros.append(f"Avaliação: {valor}★")
-                        elif chave == 'max_preco':
-                            desc_filtros.append(f"Preço: R$ {valor:.2f}")
-                        elif chave == 'lancamento_exato':
-                            desc_filtros.append(f"Ano: {valor}")
-                        else:
-                            desc_filtros.append(f"{chave}: {valor}")
-                    
-                    titulo = "BUSCA AVANÇADA: " + " | ".join(desc_filtros)
-                    self.exibir_resultados(resultados, titulo)
-                    self.menu_detalhes(resultados)
-                
-                case "8":
                     print("\nRECOMENDAÇÕES PERSONALIZADAS")
                     
                     if self.usuarios:
@@ -322,14 +244,14 @@ class SistemaBusca:
                         self.exibir_resultados(resultados, "RECOMENDAÇÕES PERSONALIZADAS")
                         self.menu_detalhes(resultados)
                 
-                case "9":
+                case "8":
                     print("\nTODOS OS JOGOS DISPONÍVEIS")
                     resultados = self.estoque
                     resultados.sort(key=lambda x: x.nome)
                     self.exibir_resultados(resultados, "CATÁLOGO COMPLETO")
                     self.menu_detalhes(resultados)
                 
-                case "10":
+                case "9":
                     print("\nUSUÁRIOS CADASTRADOS")
                     print("="*60)
                     for i, usuario in enumerate(self.usuarios, 1):
